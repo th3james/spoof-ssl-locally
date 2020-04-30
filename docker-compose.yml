@@ -1,0 +1,13 @@
+version: '3'
+services:
+  nginx:
+    build: .
+    ports:
+      - "443:443"
+    networks:
+      - §target_network§
+
+networks:
+  default:
+    external:
+      name: §target_network§
