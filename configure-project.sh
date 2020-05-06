@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 echo "What hostname do you want to spoof?"
 
@@ -32,9 +32,10 @@ LC_ALL=C find -XE . \
   -type f -and -regex "\.\/(docker-compose.yml|generate-certs.sh|nginx.conf)" \
   -exec sed -i '' "s/§target_network§/$target_network/g" {} +
 
-read -p "Generate certificate (y/n)?" choice
+echo "Generate certificate (y/n)?"
+read choice
 case "$choice" in 
-  y|Y ) ./generate-certs.sh;;
+  y|Y ) /bin/zsh generate-certs.sh;;
   * ) echo "skipping cert generation";;
 esac
 
