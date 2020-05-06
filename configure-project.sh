@@ -31,3 +31,16 @@ LC_ALL=C find -XE . \
 LC_ALL=C find -XE . \
   -type f -and -regex "\.\/(docker-compose.yml|generate-certs.sh|nginx.conf)" \
   -exec sed -i '' "s/§target_network§/$target_network/g" {} +
+
+read -p "Generate certificate (y/n)?" choice
+case "$choice" in 
+  y|Y ) ./generate-certs.sh;;
+  * ) echo "skipping cert generation";;
+esac
+
+echo "See readme for instructions on trusting these SSL certificates"
+
+echo "Finally, add this line to /etc/hosts"
+```
+127.0.0.1       $spoof_host
+```

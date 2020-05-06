@@ -2,42 +2,48 @@
 A simple Nginx configuration which will allow you to serve your chosen hostname
 with a self-signed SSL certificate from your local machine.
 
-## Variables to define:
-In order to use this, you'll need to configure some variables. Each variable is
-wrapped in §, you'll need to find-replace them to use this.
+## Usage
+### Configure the app
+The configuration in this app is templated. Run the configuration script to populate the templated variables:
+```shell
+./configure-project.sh
+```
+It will ask for the following:
 
-### §target_network§
+#### §hostname_to_spoof§
+The hostname you want to use your self-signed certificate on.
+
+#### §web_app_container§
+The name of the container to proxy requests to.
+You can find this by running `docker ps`.
+
+#### §web_app_port§
+The port your web app container exposes HTTP on (note, this is the port _inside_ the docker network, not that which is exposed on your host machine).
+
+#### §target_network§
 The name of the network the Nginx container will join to proxy requests to.
 You can find this by running `docker network ls` while the target app is
 running, by default it is `<dirname>_default`.
 
-### §web_app_container§
-The name of the container to proxy requests to.
-You can find this by running `docker ps`.
+Once this is done, your provided variables will override the §templated§ values.
 
-### §web_app_port§
-The port your web app container exposes HTTP on (note, this is the port _inside_ the docker network, not that which is exposed on your host machine).
-
-### §hostname_to_spoof§
-The hostname you want to use your self-signed certificate on.
-
-## Generate an SSL certificate
+### Generate an SSL certificate
+Next the script will ask if you want to generate SSL certs.
 [Generate own cert with openssl](https://letsencrypt.org/docs/certificates-for-localhost/)
+You can do this later by running:
 ```shell
 ./generate-certs.sh
 ```
 
-## Trust the generated certificate
+#### Trust the generated certificate
+The self-signed certificates will be written to `ssl_certs/`. In order to use them you'll need to tell macOS to trust them.
 
-[Trusting own SSL certificate](https://tosbourn.com/getting-os-x-to-trust-self-signed-ssl-certificates/)
-
-* Locate where your certificate file is.
 * Open up Keychain Access.
 * Drag your certificate into Keychain Access.
 * Go into the Certificates section and locate the certificate you just added
-* Double click on it, enter the trust section and under “When using this certificate” select “Always Trust”
+* Double click on it, enter the trust section and under "When using this certificate" select "Always Trust"
 
-## Point the hostname at your computer
+### Override local DNS look-up to point to your machine
 Add the following to /etc/hosts
 ```
 127.0.0.1       §hostname_to_spoof§
