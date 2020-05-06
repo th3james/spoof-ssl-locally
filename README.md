@@ -31,7 +31,9 @@ Once this is done, your provided variables will override the §templated§ value
 
 ### Generate an SSL certificate
 Next the script will ask if you want to generate SSL certs.
-[Generate own cert with openssl](https://letsencrypt.org/docs/certificates-for-localhost/)
+
+[This uses openssl](https://letsencrypt.org/docs/certificates-for-localhost/)
+
 You can do this later by running:
 ```shell
 ./generate-certs.sh
