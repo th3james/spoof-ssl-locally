@@ -1,6 +1,8 @@
 # Configuring Local SSL
 A simple Nginx configuration which will allow you to serve your chosen hostname
 with a self-signed SSL certificate from your local machine.
+Instructions are only for macOS and zsh (macOS default shell), but it shouldn't
+be too hard to work it out for other platforms.
 
 ## Usage
 ### Configure the app
