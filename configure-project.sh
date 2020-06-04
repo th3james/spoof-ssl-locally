@@ -42,6 +42,4 @@ esac
 echo "See readme for instructions on trusting these SSL certificates"
 
 echo "Finally, add this line to /etc/hosts"
-```
-127.0.0.1       $spoof_host
-```
+echo "127.0.0.1       $spoof_host"
