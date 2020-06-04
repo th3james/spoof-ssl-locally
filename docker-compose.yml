@@ -5,7 +5,7 @@ services:
     ports:
       - "443:443"
     networks:
-      - §target_network§
+      - default
 
 networks:
   default:
