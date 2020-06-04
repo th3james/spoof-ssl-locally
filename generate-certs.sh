@@ -1,3 +1,4 @@
+#!/bin/zsh
 mkdir -p ssl_certs
 openssl req -x509 -out ssl_certs/self-signed-spoof-cert.crt -keyout ssl_certs/self-signed-spoof-cert.key \
   -newkey rsa:2048 -nodes -sha256 \
